@@ -10,7 +10,6 @@ module.exports = function(recipient, text, context, cb) {
       .verifications
       .create({
         to: recipient,
-        //channel: 'sms',
         channel:verifyChannel,
         customCode: context.code
       })
