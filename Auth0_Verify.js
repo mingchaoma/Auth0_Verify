@@ -15,9 +15,13 @@ exports.onExecuteSendPhoneMessage = async (event, api) => {
 
   const { recipient, code } = event.message_options;
 
+  // add this to fix " 1333444999  "
+  // "333 444 5555"
+  const sanitizedNumber = recipient.replace(/\s/g, '').trim();
+
   await client.verify.services(TWILIO_VERIFY_SID)
     .verifications.create({
-      to: recipient,
+      to: sanitizedNumber,
       channel: messageType,
       customCode: code
     })
